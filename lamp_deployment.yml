@@ -14,12 +14,21 @@
   - name: Execute the lamp script on slave node
     script: /home/vagrant/deployment.sh
 
+  - name: Check if PHP application is accessible
+    uri:
+      url: http://192.168.33.14
+    register: php_out
+    ignore_errors: true
+
+  - name: Display message if PHP application is accessible
+    debug:
+      msg: "The PHP application was deployed successfully and is accesible"
+    when: php_out.status == 200
 
   - name: Schedule a cron job to check server uptime
     cron:
-      name: Check server uptime and save to file
+      name: Check server uptime and save to file      
       user: "vagrant"
       minute: "0"
       hour: "0"
       job: "uptime >> /var/log/uptime.txt"
-

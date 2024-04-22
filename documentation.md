@@ -41,7 +41,7 @@ this key will be saved in the slave node `.ssh/authorisedkeys` file.
 ![ping](/images/ping.jpg)  
   
 7. Our result show that we can ping the slave node successfully so therefore we can go ahead and execute our ansible playbook with the following command `ansible-playbook lamp_deployment.yml`, run this command from your ansible directory. PS: if you didn't create an ansible.cfg file as done earlier which points to our inventory file, you should use this command instead `ansible all -i inventory lamp_deployment.yml`. The following output will be gotten if everything is in the right place. if the execution was succesfull you should see something like this.  
-![ansible successful](/images/ansible%20success.jpg)
+![ansible successful](/images/ansible%20sucess.jpg)
   
 8. Get your slave ip by running the command `ip a`  
 ![IP](/images/ip.jpg)
