@@ -19,6 +19,7 @@ That beign done, i went into my master node and created my bash script called `d
 4. Clone a PHP application from Github
 5. Configure Apache web server and MySQL  
 Here is a copy of my bash script [deployment.sh](deployment.sh)  
+I used functions throughout the script for modularity and reusabilty purpose. 
 
 ## CONFIGURING ANSIBLE
 Now that the bash script is ready, the next step is to configure our ansible so that we can execute our script on the slave node. In order to do this i took the following steps on the master node.
@@ -40,7 +41,7 @@ this key will be saved in the slave node `.ssh/authorisedkeys` file.
 6. Now we can use ansible to ping our slave node from the master node, this is how we will be sure if we can run our ansible playbook on the slave node or not. we will execute the command `ansible all -m ping`. make sure you run this command from the ansible directory created earlier. PS: if we didn't create an ansible.cfg file as done earlier which points to our inventory file, we will use this command instead `ansible all -i inventory -m ping`. The following output will be gotten if everything is in the right place.  
 ![ping](/images/ping.jpg)  
   
-7. Our result show that we can ping the slave node successfully so therefore we can go ahead and execute our ansible playbook with the following command `ansible-playbook lamp_deployment.yml`, run this command from your ansible directory. PS: if you didn't create an ansible.cfg file as done earlier which points to our inventory file, you should use this command instead `ansible all -i inventory lamp_deployment.yml`. The following output will be gotten if everything is in the right place. if the execution was succesfull you should see something like this.  
+7. Our result show that we can ping the slave node successfully so therefore we can go ahead and execute our ansible playbook with the following command `ansible-playbook lamp_deployment.yml`, run this command from your ansible directory. PS: if you didn't create an ansible.cfg file as done earlier which points to our inventory file, you should use this command instead `ansible all -i inventory lamp_deployment.yml`. The following output will be gotten if everything is in the right place. if the execution was succesfull you should see something like this. Here is a copy of my playbook [Playbook](lamp_deployment.yml)  
 ![ansible successful](/images/ansible%20sucess.jpg)
   
 8. Get your slave ip by running the command `ip a`  
@@ -52,5 +53,5 @@ this key will be saved in the slave node `.ssh/authorisedkeys` file.
 10. Check your Slave node to confirm if your crontab is installed succesfully, run the command `crontab -l` and you should see something like this.
 ![crontab -l](/images/crontab%20-l.jpg)
   
-11. To confirm that my cronjob worked, i cat the /var/log/uptime.txt where i append the result and here is my result.
+11. To confirm that my cronjob worked, i cat the /var/log/uptime.txt where i redirected the result of the command and here is the result.
 ![uptime](/images/uptime.jpg)
